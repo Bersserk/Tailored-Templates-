@@ -25,14 +25,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
-data class MenuSection(
+data class Item(
     val title: String,
     val image: String
 )
 
 @Composable
-fun MenuSections(
-    menuSections: List<MenuSection>,
+fun ItemsRowScrollable(
+    items: List<Item>,
 ) {
     val selectedIndex = rememberSaveable { mutableIntStateOf(0) }
 
@@ -44,8 +44,8 @@ fun MenuSections(
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
         ) {
-            itemsIndexed(menuSections) { index, item ->
-                MenuItemCard(
+            itemsIndexed(items) { index, item ->
+                ItemCard(
                     imageItem = item.image,
                     isSelected = index == selectedIndex.intValue,
                     menuTitle = item.title,
@@ -57,7 +57,7 @@ fun MenuSections(
 }
 
 @Composable
-fun MenuItemCard(
+private fun ItemCard(
     imageItem: String,
     isSelected: Boolean,
     menuTitle: String,
